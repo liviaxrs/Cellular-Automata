@@ -1,11 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import random
+import matplotlib.animation as animation
 
-# Parameters
-GRID_SIZE = 100                
-TIME_STEPS = 50               
-NUTRIENT_DIFFUSION = 0.05      # Nutrient diffusion rate (delta)
+# Parametros
+GRID_SIZE = 50               
+TIME_STEPS = 30              
+NUTRIENT_DIFFUSION = 0.05     # Nutrient diffusion rate (delta)
 THRESHOLD = 0.4               # Growth threshold (theta)
 NEW_CELL_COST = 0.3           # Nutrient cost for new cell (a1)
 OLD_CELL_COST = 0.1           # Nutrient cost for existing cell (a2)
@@ -15,6 +16,13 @@ M = 1                         # Cell growth occurs every m time steps
 
 grid = np.zeros((GRID_SIZE, GRID_SIZE), dtype=int)  
 nutrients = np.random.random((GRID_SIZE, GRID_SIZE))  # Random nutrient levels
+
+
+def initialize_grid(size, initial_live_cells):
+    grid = np.zeros((size, size), dtype=int)
+    live_cells = np.random.randint(0, size * size, initial_live_cells)
+    grid[np.unravel_index(live_cells, (size, size))] = 1
+    return grid
 
 # calcular crowding k(t)
 def calculate_crowding(grid, x, y):
@@ -38,7 +46,7 @@ def diffuse_nutrients(nutrients):
             new_nutrients[x, y] = (1 - NUTRIENT_DIFFUSION) * nutrients[x, y] + NUTRIENT_DIFFUSION * total_nutrient / 8
     return new_nutrients
 
-# Main simulation
+# Simulação 
 for t in range(TIME_STEPS):
     new_nutrients = diffuse_nutrients(nutrients)
 

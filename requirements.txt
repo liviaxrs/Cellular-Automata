@@ -1,4 +1,4 @@
-numpy
+numpy 
 itertools
 matplotlib
 random

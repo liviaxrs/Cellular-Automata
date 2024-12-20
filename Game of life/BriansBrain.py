@@ -30,7 +30,7 @@ def update(grid):
 
 # Main function to run the animation
 def main():
-    size = 50  # Grid size
+    size = 100  # Grid size
     steps = 200  # Number of steps in the animation
     grid = initialize_brians_brain(size)
     
