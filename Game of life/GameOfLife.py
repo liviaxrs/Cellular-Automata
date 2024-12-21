@@ -66,5 +66,5 @@ def main():
     ani = animation.FuncAnimation(fig, update, fargs=(img, grid, ax, dimensions), frames=100, interval=100, save_count=50)
     plt.show()
 
-# Run the simulation
+
 main()
